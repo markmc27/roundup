@@ -35,14 +35,23 @@ Sun 4th Sept 1130:
 Sun 4th Sept 1600: 
     Starting to add the dependencies and packages that I need along with the relevant ADRs for the libs that I'm using. 
 
-Sun 5th Sept 1715: 
+Sun 4th Sept 1715: 
     Wow, I always forget how annoying it is to set up a new project. It really puts your problem solving (read: Googling) skills to the test. Cypress and the cucumber preprocessor have updated a lot since I last set them up but managed to find the relevant docs and a couple of helpful stackoverflow posts and github issues that pointed me in the right direction. 
 
     Happy with where I'm at and can now start on building the features. My plan is to work outside-in and take a TDD approach. So I'll start with writing a broken BDD test and then create the relevant components and supporting code to make the BDD scenario pass. Along the way, I'll uncover new components, classes and interfaces that I'll need to create and I'll build them using a TDD approach. 
 
-Sun 5th Sept 1800: 
+Sun 4th Sept 1800: 
     I take that back. I've just spent nearly an hour debugging a configuration issue between typescript and cypress. Fixed now but that was painful. 
 
     Onto features!
 
-    
+Sun 4th Sept 1930: 
+    Took a break for tea but thought I was in a good place to really get the ball rolling with features. I was wrong. I ran into a few more teething issues with the configs. This time Cypress and react testing library didn't want to play nicely with each other. 
+
+    Eventually figured out that the cypress.config.ts must have been importing a load of chai globals. Once I ignored that in the gloval tsconfig everything started to work. 
+
+Sun 4th Sept 2046:
+
+Finished for the night. Started to gain some real momentum. Managed to finish the "User sees account information" feature as a first-pass with dummy data. Getting that far involved creating a couple of entities, components, and corresponding tests. 
+
+I have a feeling I might need to simplify the UI a bit to get to the nitty-gritty part of the challenge of integrating with the API. 
