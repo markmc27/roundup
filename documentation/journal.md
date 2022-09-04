@@ -31,3 +31,18 @@ Sun 4th Sept 1100:
 
 Sun 4th Sept 1130:
     Finished first iteration of creating BDD scenarios. Taking a break then I'll start on the site setup. 
+
+Sun 4th Sept 1600: 
+    Starting to add the dependencies and packages that I need along with the relevant ADRs for the libs that I'm using. 
+
+Sun 5th Sept 1715: 
+    Wow, I always forget how annoying it is to set up a new project. It really puts your problem solving (read: Googling) skills to the test. Cypress and the cucumber preprocessor have updated a lot since I last set them up but managed to find the relevant docs and a couple of helpful stackoverflow posts and github issues that pointed me in the right direction. 
+
+    Happy with where I'm at and can now start on building the features. My plan is to work outside-in and take a TDD approach. So I'll start with writing a broken BDD test and then create the relevant components and supporting code to make the BDD scenario pass. Along the way, I'll uncover new components, classes and interfaces that I'll need to create and I'll build them using a TDD approach. 
+
+Sun 5th Sept 1800: 
+    I take that back. I've just spent nearly an hour debugging a configuration issue between typescript and cypress. Fixed now but that was painful. 
+
+    Onto features!
+
+    

@@ -1,4 +1,4 @@
-# 1. Next JS
+# 1. Cypress and BDD
 
 Date: 4 Sep 2022
 

@@ -1,4 +1,4 @@
-Feature: See my account information
+Feature: View account information
     In order to make an informed decision about my weekly savings amount
     As a customer
     I want to review my transactions, savings goals, and proposed round-up for given week
