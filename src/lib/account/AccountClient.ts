@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios';
+import handleAxiosError from '../../utils/handleAxiosError';
 import IAccountClient, { AccountInformationResponse } from './IAccountClient';
 
 export interface AccountClientConfig {
@@ -40,14 +41,7 @@ export default class AccountClient implements IAccountClient {
   }
 
   private async makeRequest(endpoint: string) {
-    const handle_axios_error = function (err: any) {
-      if (err.response) {
-        console.log(err.response);
-      }
-      throw new Error(err);
-    };
-
-    axios.interceptors.response.use((r) => r, handle_axios_error);
+    axios.interceptors.response.use((r) => r, handleAxiosError);
 
     const axiosConfig: AxiosRequestConfig = {
       headers: {

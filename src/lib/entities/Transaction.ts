@@ -1,13 +1,17 @@
-import BaseEntity from "./BaseEntity";
-import MonetaryAmount from "./MonetaryAmount";
+import BaseEntity from './BaseEntity';
+import MonetaryAmount from './MonetaryAmount';
 
 export default class Transaction extends BaseEntity {
-    counterParty!: string;
+  counterParty!: string;
 
-    amount!: MonetaryAmount;
+  amount!: MonetaryAmount;
 
-    constructor(init: Partial<Transaction>) {
-        super(init);
-        Object.assign(this, init);
-    }
+  direction!: 'IN' | 'OUT';
+
+  transactionDate!: string;
+
+  constructor(init: Partial<Transaction>) {
+    super(init);
+    Object.assign(this, init);
+  }
 }

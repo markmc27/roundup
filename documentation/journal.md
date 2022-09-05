@@ -66,3 +66,18 @@ Mon 5th Sept 0850:
     Finished the account tests. I'd like to extend the TestAccountClient to take in seed data but it's good enough for now. If I need to reuse that class in future tests I'll reconsider it. 
 
     Added defaultCategoryId to AccountWithBalance entity because it's needed for transactions. But it doesn't seem right for it to live there, there probably needs to be a category entity. But for this exercise, it's good enough. 
+
+Mon 5th Sept 1245: 
+    Adding transactions repository and can see a couple of improvements I'd make if this was going to be a larger project. 
+
+    I think there's a generic interface like IRetrieve<T> that could remove the need for the specific repo interfaces. 
+
+    I'd also want to make the return type from the transaction repo immutable. It's currently Transaction[] but I don't like that those transactions are open to being modified after returning.
+
+Mon 5th Sept 1300: 
+    Creating TransactionsClient and realising that some of the ClientConfig properties in the interface are duplicated. 
+    
+    Could this be a base interface with the authToken and baseURL that the clients extend to add their own endpoints to? 
+
+Mon 5th Sept 1330:
+    Making an assumption that if the amount to round up is *.00 then the round up amount is 0. 

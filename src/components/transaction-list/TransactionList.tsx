@@ -17,6 +17,7 @@ interface RoundUpFormProps {
 const TransactionList = (props: RoundUpFormProps) => {
   const { transactions } = props;
 
+  console.log('transactions', transactions);
   return (
     <Box>
       <Typography variant="h2">Transactions</Typography>
@@ -27,7 +28,10 @@ const TransactionList = (props: RoundUpFormProps) => {
               <CardContent>
                 <Typography>{transaction.counterParty}</Typography>
                 <Typography>
-                  {formatMonetaryAmount(transaction.amount)}
+                  {formatMonetaryAmount(
+                    transaction.amount.minorUnits,
+                    transaction.amount.currency
+                  )}
                 </Typography>
               </CardContent>
             </Card>
