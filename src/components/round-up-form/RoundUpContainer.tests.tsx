@@ -86,6 +86,6 @@ describe('Round-up form', () => {
       />
     );
 
-    expect(getByText('Balance: £10.00')).toBeVisible();
+    expect(getByText('Your Balance: £10.00')).toBeVisible();
   });
 });

@@ -52,6 +52,17 @@ Sun 4th Sept 1930:
 
 Sun 4th Sept 2046:
 
-Finished for the night. Started to gain some real momentum. Managed to finish the "User sees account information" feature as a first-pass with dummy data. Getting that far involved creating a couple of entities, components, and corresponding tests. 
+    Finished for the night. Started to gain some real momentum. Managed to finish the "User sees account information" feature as a first-pass with dummy data. Getting that far involved creating a couple of entities, components, and corresponding tests. 
 
-I have a feeling I might need to simplify the UI a bit to get to the nitty-gritty part of the challenge of integrating with the API. 
+    I have a feeling I might need to simplify the UI a bit to get to the nitty-gritty part of the challenge of integrating with the API. 
+
+
+Mon 5th Sept 0830:
+    Finished the first API integration. Had a really annoying error in a failing test about a circular dependency in the axios response. Took me ages to figure out what was happening. Eventually added a custom error handler to axios to print out the http response from the Starling API and the token had expired. 
+
+    Fixed and kept the custom error handler so the response code is returned if there is an error.  
+
+Mon 5th Sept 0850:
+    Finished the account tests. I'd like to extend the TestAccountClient to take in seed data but it's good enough for now. If I need to reuse that class in future tests I'll reconsider it. 
+
+    Added defaultCategoryId to AccountWithBalance entity because it's needed for transactions. But it doesn't seem right for it to live there, there probably needs to be a category entity. But for this exercise, it's good enough. 
