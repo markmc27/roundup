@@ -24,6 +24,15 @@ export default class TestAccountClient implements IAccountClient {
             defaultCategoryId: '11111111-1111-1111-1111-111111111111',
           } as AccountInformationResponse);
           break;
+        case 'edb62ad2-80e1-4918-a884-5c69f687e2d3':
+          resolve({
+            id: accountId,
+            name: 'Personal',
+            effectiveBalanceCurrency: 'GBP',
+            effectiveBalanceMinorUnits: 456,
+            defaultCategoryId: '00000000-0000-0000-0000-000000000000',
+          } as AccountInformationResponse);
+          break;
       }
     });
   }
