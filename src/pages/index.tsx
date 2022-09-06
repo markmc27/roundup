@@ -4,7 +4,9 @@ import Head from 'next/head';
 import RoundUpContainer from '../components/round-up-form/RoundUpContainer';
 import AccountRepositoryFactory from '../lib/account/AccountRepositoryFactory';
 import AccountWithBalance from '../lib/entities/AccountWithBalance';
+import SavingsGoal from '../lib/entities/SavingsGoal';
 import Transaction from '../lib/entities/Transaction';
+import SavingsGoalRepositoryFactory from '../lib/savings-goal/SavingsGoalsRepositoryFactory';
 import TransactionsRepositoryFactory from '../lib/transactions/TransactionsRepositoryFactory';
 import styles from '../styles/Home.module.css';
 
@@ -13,6 +15,7 @@ type PageProps = {
   transactions: Transaction[];
   defaultStartDate: string;
   defaultEndDate: string;
+  savingsGoals: SavingsGoal[];
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -32,6 +35,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     today.toJSDate().toISOString()
   );
 
+  const savingsGoalsRepo =
+    new SavingsGoalRepositoryFactory().getSavingsGoalRepo();
+  const savingsGoals = await savingsGoalsRepo.retrieveSavingsGoals(
+    process.env.NEXT_PUBLIC_ACCOUNT_ID as string
+  );
+
   return {
     props: {
       account: JSON.parse(JSON.stringify(accountInfo)),
@@ -41,6 +50,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       roundUpAmount: transactions
         .map((transaction) => transaction.amount.minorUnits)
         .reduce((acc, amount) => acc + amount, 0),
+      savingsGoals: JSON.parse(JSON.stringify(savingsGoals)),
     } as PageProps,
   };
 };
@@ -50,6 +60,7 @@ const Home: NextPage<PageProps> = ({
   transactions,
   defaultStartDate,
   defaultEndDate,
+  savingsGoals,
 }: PageProps) => (
   <div className={styles.container}>
     <Head>
@@ -63,6 +74,7 @@ const Home: NextPage<PageProps> = ({
         transactions={transactions}
         defaultStartDate={defaultStartDate}
         defaultEndDate={defaultEndDate}
+        savingsGoal={savingsGoals[0]}
       />
     </main>
   </div>

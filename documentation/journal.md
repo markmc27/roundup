@@ -81,3 +81,11 @@ Mon 5th Sept 1300:
 
 Mon 5th Sept 1330:
     Making an assumption that if the amount to round up is *.00 then the round up amount is 0. 
+
+
+Tue 6th Sept 0700:
+    Added the savings goals repo and client. Now hooking that up to the page. 
+
+    Starting to notice patterns that I would probably refactor if I had more time. For instance, all clients add a custom error handler to axios. I'd like to move that to a base class or wrapper around axios.
+
+    I'd also like to create view model representations of the entities. It niggles me that the views are using the entity models but for this challenge, the entities contain only what's needed for the challenge so it would be eager optimisation at this point. 

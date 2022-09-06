@@ -70,6 +70,13 @@ const RoundUpContainer = (props: RoundUpFormProps) => {
         <Box>
           <Typography>Savings goals</Typography>
           <Typography data-testid="savings-goal">{savingsGoal.name}</Typography>
+          <Typography data-testid="savings-goal">
+            Saved total:{' '}
+            {formatMonetaryAmount(
+              savingsGoal.totalSaved.minorUnits,
+              savingsGoal.totalSaved.currency
+            )}
+          </Typography>
         </Box>
         <Button>Transfer to savings goal</Button>
       </Stack>
