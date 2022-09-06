@@ -36,7 +36,6 @@ Feature: View account information
         |Tesco            |£12.29  |£0.71    |
         |Shell            |£291.03 |£0.97    |
 
-    @focus
     Scenario: User has a savings goal
         Given I visit the site 
         And I am viewing "Savings goals"
