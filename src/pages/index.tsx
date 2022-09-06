@@ -25,7 +25,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   );
 
   const today = DateTime.utc().startOf('day');
-  const lastWeek = today.minus({ months: 7 });
+  const lastWeek = today.minus({ days: 7 });
   const transactions = await transactionsRepo.retrieveTransactionsBetween(
     process.env.NEXT_PUBLIC_ACCOUNT_ID as string,
     lastWeek.toJSDate().toISOString(),

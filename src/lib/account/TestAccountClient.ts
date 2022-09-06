@@ -29,7 +29,7 @@ export default class TestAccountClient implements IAccountClient {
             id: accountId,
             name: 'Personal',
             effectiveBalanceCurrency: 'GBP',
-            effectiveBalanceMinorUnits: 456,
+            effectiveBalanceMinorUnits: 100000,
             defaultCategoryId: '00000000-0000-0000-0000-000000000000',
           } as AccountInformationResponse);
           break;

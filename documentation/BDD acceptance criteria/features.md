@@ -22,7 +22,7 @@ Feature: View account information
     Scenario: Week defaults to most recent 7 days
     Given I am viewing round-up date
     Then the end date is set to today
-    And the start date is set to 7 days earlier than today at midnight
+    And the start date is set to 7 days earlier than today
 
     Scenario: User reviews transactions
     Given I am viewing "Transactions"
