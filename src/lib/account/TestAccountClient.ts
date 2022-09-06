@@ -1,9 +1,13 @@
 import IAccountClient, { AccountInformationResponse } from './IAccountClient';
 
 export default class TestAccountClient implements IAccountClient {
+  public static balance: number = 100000;
+
   getAccountInformation(
     accountId: string
   ): Promise<AccountInformationResponse> {
+    console.log('getAccountInformation');
+
     return new Promise((resolve) => {
       switch (accountId) {
         case 'aaaaaaaa-aaaa-4aaa-aaaa-aaaaaaaaaaaa':
@@ -29,7 +33,7 @@ export default class TestAccountClient implements IAccountClient {
             id: accountId,
             name: 'Personal',
             effectiveBalanceCurrency: 'GBP',
-            effectiveBalanceMinorUnits: 100000,
+            effectiveBalanceMinorUnits: TestAccountClient.balance,
             defaultCategoryId: '00000000-0000-0000-0000-000000000000',
           } as AccountInformationResponse);
           break;

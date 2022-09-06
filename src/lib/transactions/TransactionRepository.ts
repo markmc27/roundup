@@ -41,6 +41,7 @@ export default class TransactionsRepository implements ITransactionsRepository {
           }),
           transactionDate: transaction.transactionTime,
           counterParty: transaction.counterParty,
+          reference: transaction.reference,
         });
       });
   }

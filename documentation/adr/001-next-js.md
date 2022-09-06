@@ -8,7 +8,7 @@ Proposed
 
 ## Context
 
-To complete this challenge, the app needs to integrate with the Starling developer APIs. To call those APIs, they require an authentication token. To keep that token private, the API will be called server-side. 
+To complete this challenge, the app needs to integrate with the Starling developer APIs. 
 
 We will also be using BDD acceptance criteria and automated testing, this will require an environment that can be easily configured to return reliable, predictable data. This will be easier with a tool that supports different configuration options. 
 

@@ -42,8 +42,6 @@ export default class TransactionsClient implements ITransactionsClient {
       axiosConfig
     );
 
-    console.log('TRANSACTIONS', response.data);
-
     const transactions = response.data.feedItems.map((feedItem: any) => ({
       direction: feedItem.direction,
       settledAmount: {

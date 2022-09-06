@@ -9,7 +9,6 @@ Then(
     );
 
     table.hashes().forEach((transaction) => {
-      console.log(transaction);
       cy.contains(transaction.TransactionParty);
       cy.contains(transaction.Amount);
       cy.contains(transaction.RoundUp);

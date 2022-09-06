@@ -7,6 +7,7 @@ export interface TransactionsResponse {
     };
     transactionTime: string;
     counterParty: string;
+    reference: string;
   }[];
 }
 

@@ -21,6 +21,7 @@ export default class TestTransactionsClient implements ITransactionsClient {
           },
           transactionTime: endDateTime.minus({ days: 1 }).toISO(),
           counterParty: 'Mickey Mouse',
+          reference: "Minnie's birthday",
         },
         {
           direction: 'OUT',
@@ -30,6 +31,7 @@ export default class TestTransactionsClient implements ITransactionsClient {
           },
           transactionTime: endDateTime.minus({ days: 2 }).toISO(),
           counterParty: 'Faster payment',
+          reference: 'Monthly savings',
         },
         {
           direction: 'OUT',
@@ -39,6 +41,7 @@ export default class TestTransactionsClient implements ITransactionsClient {
           },
           transactionTime: endDateTime.minus({ days: 3 }).toISO(),
           counterParty: 'Tesco',
+          reference: 'Liverpool branch',
         },
         {
           direction: 'OUT',
@@ -48,6 +51,7 @@ export default class TestTransactionsClient implements ITransactionsClient {
           },
           transactionTime: endDateTime.minus({ days: 4 }).toISO(),
           counterParty: 'Shell',
+          reference: 'Liverpool branch',
         },
         {
           direction: 'IN',
@@ -57,6 +61,7 @@ export default class TestTransactionsClient implements ITransactionsClient {
           },
           transactionTime: endDateTime.minus({ days: 4 }).toISO(),
           counterParty: 'John Smith',
+          reference: 'Birthday drinks',
         },
       ],
     });

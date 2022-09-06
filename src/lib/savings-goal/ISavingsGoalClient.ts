@@ -13,6 +13,12 @@ export interface CreateSavingsGoalResponse {
   errors: string[];
 }
 
+export interface AddMoneyToSavingsGoalResponse {
+  transferUid: string;
+  success: boolean;
+  errors: string[];
+}
+
 export default interface ISavingsGoalClient {
   getSavingsGoals(accountId: string): Promise<SavingsGoalResponse>;
   createSavingsGoal(
@@ -20,4 +26,11 @@ export default interface ISavingsGoalClient {
     name: string,
     currency: string
   ): Promise<CreateSavingsGoalResponse>;
+  addMoneyToSavingsGoal(
+    accountId: string,
+    savingGoalId: string,
+    transferId: string,
+    amountMinorUnits: number,
+    currency: string
+  ): Promise<AddMoneyToSavingsGoalResponse>;
 }

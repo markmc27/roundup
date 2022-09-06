@@ -49,4 +49,26 @@ describe('Transaction Repository', () => {
       expect(transaction.direction).toBe('OUT');
     });
   });
+
+  it('should only return populated transaction information', async () => {
+    const startDate = DateTime.now().minus({ weeks: 2 });
+    const endDate = DateTime.now();
+
+    const transactionsRepo = new TransactionsRepository(
+      new TestTransactionsClient()
+    );
+
+    const transactions = await transactionsRepo.retrieveTransactionsBetween(
+      'aaaaaaaa-aaaa-4aaa-aaaa-aaaaaaaaaaaa',
+      startDate.toISO(),
+      endDate.toISO()
+    );
+
+    transactions.forEach((transaction) => {
+      expect(transaction.amount.minorUnits).toBeTruthy();
+      expect(transaction.amount.currency).toBeTruthy();
+      expect(transaction.counterParty).toBeTruthy();
+      expect(transaction.reference).toBeTruthy();
+    });
+  });
 });

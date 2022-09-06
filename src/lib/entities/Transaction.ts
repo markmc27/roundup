@@ -10,6 +10,8 @@ export default class Transaction extends BaseEntity {
 
   transactionDate!: string;
 
+  reference!: string;
+
   constructor(init: Partial<Transaction>) {
     super(init);
     Object.assign(this, init);

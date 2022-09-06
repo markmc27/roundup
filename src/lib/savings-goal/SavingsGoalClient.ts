@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import handleAxiosError from '../../utils/handleAxiosError';
 import ISavingsGoalClient, {
+  AddMoneyToSavingsGoalResponse,
   CreateSavingsGoalResponse,
   SavingsGoalResponse,
 } from './ISavingsGoalClient';
@@ -8,6 +9,7 @@ import ISavingsGoalClient, {
 export interface SavingsGoalClientConfig {
   baseUrl: string;
   savingsGoalsEndpoint: string;
+  addMoneyToSavingsGoalEndpoint: string;
   authToken: string;
 }
 
@@ -22,11 +24,13 @@ export default class SavingsGoalClient implements ISavingsGoalClient {
     return {
       headers: {
         Authorization: `Bearer ${this.config.authToken}`,
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
       },
     };
   }
 
-  private generateEndpoint(accountId: string): string {
+  private generateBaseEndpoint(accountId: string): string {
     return this.config.savingsGoalsEndpoint.replace('{accountId}', accountId);
   }
 
@@ -38,7 +42,7 @@ export default class SavingsGoalClient implements ISavingsGoalClient {
     axios.interceptors.response.use((r) => r, handleAxiosError);
 
     const response = await axios.put(
-      `${this.config.baseUrl}${this.generateEndpoint(accountId)}`,
+      `${this.config.baseUrl}${this.generateBaseEndpoint(accountId)}`,
       {
         name,
         currency,
@@ -57,7 +61,7 @@ export default class SavingsGoalClient implements ISavingsGoalClient {
     axios.interceptors.response.use((r) => r, handleAxiosError);
 
     const response = await axios.get(
-      `${this.config.baseUrl}${this.generateEndpoint(accountId)}`,
+      `${this.config.baseUrl}${this.generateBaseEndpoint(accountId)}`,
       this.axiosConfig()
     );
 
@@ -75,5 +79,37 @@ export default class SavingsGoalClient implements ISavingsGoalClient {
     return {
       savingsGoals,
     } as SavingsGoalResponse;
+  }
+
+  async addMoneyToSavingsGoal(
+    accountId: string,
+    savingGoalId: string,
+    transferId: string,
+    amountMinorUnits: number,
+    currency: string
+  ): Promise<AddMoneyToSavingsGoalResponse> {
+    axios.interceptors.response.use((r) => r, handleAxiosError);
+
+    const endpoint = this.config.addMoneyToSavingsGoalEndpoint
+      .replace('{accountId}', accountId)
+      .replace('{savingGoalId}', savingGoalId)
+      .replace('{transferId}', transferId);
+
+    const response = await axios.put(
+      `${this.config.baseUrl}${endpoint}`,
+      {
+        amount: {
+          currency: currency,
+          minorUnits: amountMinorUnits,
+        },
+      },
+      this.axiosConfig()
+    );
+
+    return {
+      success: response.data.success,
+      errors: response.data.errors,
+      transferUid: response.data.transferUid,
+    } as AddMoneyToSavingsGoalResponse;
   }
 }

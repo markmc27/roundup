@@ -89,3 +89,19 @@ Tue 6th Sept 0700:
     Starting to notice patterns that I would probably refactor if I had more time. For instance, all clients add a custom error handler to axios. I'd like to move that to a base class or wrapper around axios.
 
     I'd also like to create view model representations of the entities. It niggles me that the views are using the entity models but for this challenge, the entities contain only what's needed for the challenge so it would be eager optimisation at this point. 
+
+Tue 6th Sept 1230: 
+    Spent some time cleaning up the react components. Renamed the RoundUpContainer to RoundUpSummary to avoid confusion with the container pattern. 
+
+    Also adding React Query to support re-fetching the relevant data that will change after the transfer. I'll be able to reuse the repositories that I created to fetch the data server-side. 
+
+Tue 6th Sept 1300: 
+    Added a console.error statement to the savings goal repo but ideally I'd have a logger class that handles the logging and then return a better error than 'false'. 
+
+Tue 6th Sept 1620: 
+    Working on transfer to saving goal in the repo and got the happy path working. To get the error paths working, I'd need to extend the test client and add mocks. I think that's too far for this challenge so will continue with just a test for the happy path. 
+
+Tue 6th Sept 2100:
+    Switched the app from test mode to real mode and getting CORS issues. Because it worked in the integration tests and postman, I didn't think to check the CORS headers in the browser.
+
+    I'll add a couple of Next api routes and move the calls to the server and update the hooks to use the Next api.
