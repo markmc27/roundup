@@ -43,5 +43,5 @@ describe('Account Repository Tests', () => {
     }
   );
 
-  //ignoring the test case where an account the repository doesn't find the account info for this exercise
+  // ignoring the test case where an account the repository doesn't find the account info for this exercise
 });

@@ -1,8 +1,8 @@
 import { Stack, Typography } from '@mui/material';
 import Container from '@mui/material/Container';
+import LoadingButton from '@mui/lab/LoadingButton';
 import SavingsGoal from '../../lib/entities/SavingsGoal';
 import formatMonetaryAmount from '../../utils/formatMonetaryAmountToString';
-import LoadingButton from '@mui/lab/LoadingButton';
 
 interface RoundUpFormProps {
   defaultStartDate: string;
@@ -28,15 +28,15 @@ const RoundUpSummary = (props: RoundUpFormProps) => {
   return (
     <Container maxWidth="sm">
       <Stack>
-        <Stack direction={'row'} justifyContent={'space-between'}>
+        <Stack direction="row" justifyContent="space-between">
           <Typography>Round-up start date</Typography>
           <Typography data-testid="start-date">{defaultStartDate}</Typography>
         </Stack>
-        <Stack direction={'row'} justifyContent={'space-between'}>
+        <Stack direction="row" justifyContent="space-between">
           <Typography>Round-up end date</Typography>
           <Typography data-testid="end-date">{defaultEndDate}</Typography>
         </Stack>
-        <Stack direction={'row'} justifyContent={'space-between'}>
+        <Stack direction="row" justifyContent="space-between">
           <Typography>Saved total</Typography>
           <Typography>
             {formatMonetaryAmount(
@@ -45,11 +45,11 @@ const RoundUpSummary = (props: RoundUpFormProps) => {
             )}
           </Typography>
         </Stack>
-        <Stack direction={'row'} justifyContent={'space-between'}>
+        <Stack direction="row" justifyContent="space-between">
           <Typography>Savings goal</Typography>
           <Typography data-testid="savings-goal">{savingsGoal.name}</Typography>
         </Stack>
-        <Stack mt={4} direction={'row'} justifyContent={'space-between'}>
+        <Stack mt={4} direction="row" justifyContent="space-between">
           <Typography variant="h4" component="p">
             Round-up amount
           </Typography>

@@ -1,4 +1,4 @@
-const QueryKeys: { [key: string]: string } = {
+const QueryKeys = {
   AccountInfo: 'accountInfo',
   Transactions: 'transactions',
   SavingsGoals: 'savingsGoals',

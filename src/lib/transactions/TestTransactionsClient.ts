@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 import { DateTime } from 'luxon';
 import ITransactionsClient, {
   TransactionsResponse,

@@ -23,26 +23,26 @@ export default class TransactionsRepository implements ITransactionsRepository {
     );
 
     return clientResponse.transactions
-      .filter((transaction) => {
-        return (
+      .filter(
+        (transaction) =>
           DateTime.fromISO(transaction.transactionTime) <=
             DateTime.fromISO(endDate) &&
           DateTime.fromISO(transaction.transactionTime) >=
             DateTime.fromISO(startDate)
-        );
-      })
+      )
       .filter((transaction) => transaction.direction === 'OUT')
-      .map((transaction) => {
-        return new Transaction({
-          direction: transaction.direction,
-          amount: new MonetaryAmount({
-            currency: transaction.settledAmount.currency,
-            minorUnits: transaction.settledAmount.minorUnits,
-          }),
-          transactionDate: transaction.transactionTime,
-          counterParty: transaction.counterParty,
-          reference: transaction.reference,
-        });
-      });
+      .map(
+        (transaction) =>
+          new Transaction({
+            direction: transaction.direction,
+            amount: new MonetaryAmount({
+              currency: transaction.settledAmount.currency,
+              minorUnits: transaction.settledAmount.minorUnits,
+            }),
+            transactionDate: transaction.transactionTime,
+            counterParty: transaction.counterParty,
+            reference: transaction.reference,
+          })
+      );
   }
 }

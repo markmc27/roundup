@@ -1,4 +1,3 @@
-import MonetaryAmount from '../entities/MonetaryAmount';
 import SavingsGoal from '../entities/SavingsGoal';
 
 export default interface ISavingsGoalRepository {

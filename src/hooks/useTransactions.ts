@@ -1,28 +1,22 @@
 import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 import QueryKeys from './QueryKeys';
 import Transaction from '../lib/entities/Transaction';
-import TransactionsRepositoryFactory from '../lib/transactions/TransactionsRepositoryFactory';
+import ApiRoutes from '../utils/ApiRoutes';
 
 const useTransactions = (
   initialData: Transaction[],
-  accountId: string,
   startDate: string,
   endDate: string
 ) =>
   useQuery(
     [QueryKeys.Transactions],
     async () => {
-      console.log('refetching transactions');
-      const transactionsRepo =
-        new TransactionsRepositoryFactory().getTransactionsRepo();
-
-      const transactions = await transactionsRepo.retrieveTransactionsBetween(
-        accountId,
-        startDate,
-        endDate
+      const response = await axios.get(
+        `${ApiRoutes.Transactions}?startDate=${startDate}&endDate=${endDate}`
       );
 
-      return transactions;
+      return response.data as Transaction[];
     },
     {
       initialData,

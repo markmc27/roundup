@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 import IAccountClient, { AccountInformationResponse } from './IAccountClient';
 
 export default class TestAccountClient implements IAccountClient {
@@ -6,9 +7,7 @@ export default class TestAccountClient implements IAccountClient {
   getAccountInformation(
     accountId: string
   ): Promise<AccountInformationResponse> {
-    console.log('getAccountInformation');
-
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       switch (accountId) {
         case 'aaaaaaaa-aaaa-4aaa-aaaa-aaaaaaaaaaaa':
           resolve({
@@ -36,6 +35,9 @@ export default class TestAccountClient implements IAccountClient {
             effectiveBalanceMinorUnits: TestAccountClient.balance,
             defaultCategoryId: '00000000-0000-0000-0000-000000000000',
           } as AccountInformationResponse);
+          break;
+        default:
+          reject();
           break;
       }
     });

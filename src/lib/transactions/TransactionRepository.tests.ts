@@ -1,7 +1,6 @@
-import TransactionsRepository from './TransactionRepository';
 import { DateTime } from 'luxon';
+import TransactionsRepository from './TransactionRepository';
 import TestTransactionsClient from './TestTransactionsClient';
-import { isBot } from 'next/dist/server/web/spec-extension/user-agent';
 
 describe('Transaction Repository', () => {
   test.each([

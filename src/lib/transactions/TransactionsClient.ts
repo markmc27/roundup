@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import handleAxiosError from '../../utils/handleAxiosError';
 import ITransactionsClient, {
+  StarlingTransaction,
   TransactionsResponse,
 } from './ITransactionsClient';
 
@@ -16,6 +17,7 @@ export default class TransactionsClient implements ITransactionsClient {
   constructor(config: TransactionsClientConfig) {
     this.config = config;
   }
+
   async getTransactions(
     accountId: string,
     startDate: string,
@@ -42,15 +44,21 @@ export default class TransactionsClient implements ITransactionsClient {
       axiosConfig
     );
 
-    const transactions = response.data.feedItems.map((feedItem: any) => ({
-      direction: feedItem.direction,
-      settledAmount: {
-        currency: feedItem.amount.currency,
-        minorUnits: feedItem.amount.minorUnits,
-      },
-      transactionTime: feedItem.transactionTime,
-      counterParty: feedItem.counterParty,
-    }));
+    console.log(response.data.feedItems);
+
+    const transactions = response.data.feedItems.map(
+      (feedItem: any) =>
+        ({
+          direction: feedItem.direction,
+          settledAmount: {
+            currency: feedItem.amount.currency,
+            minorUnits: feedItem.amount.minorUnits,
+          },
+          transactionTime: feedItem.transactionTime,
+          counterParty: feedItem.counterPartyName,
+          reference: feedItem.reference,
+        } as StarlingTransaction)
+    );
 
     return {
       transactions,

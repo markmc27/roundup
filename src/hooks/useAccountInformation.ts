@@ -1,23 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
-import AccountRepositoryFactory from '../lib/account/AccountRepositoryFactory';
+import axios from 'axios';
 import AccountWithBalance from '../lib/entities/AccountWithBalance';
+import ApiRoutes from '../utils/ApiRoutes';
 import QueryKeys from './QueryKeys';
 
-const useAccountInformation = (
-  initialData: AccountWithBalance,
-  accountId: string
-) =>
+const useAccountInformation = (initialData: AccountWithBalance) =>
   useQuery(
     [QueryKeys.AccountInfo],
     async () => {
-      console.log('refetching transactions');
+      const response = await axios.get(ApiRoutes.AccountInformation);
 
-      const accountRepo = new AccountRepositoryFactory().getAccountRepo();
-      const accountInfo = await accountRepo.retrieveAccountWithBalance(
-        accountId
-      );
-
-      return accountInfo;
+      return response.data as AccountWithBalance;
     },
     {
       initialData,

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable class-methods-use-this */
 import TestAccountClient from '../account/TestAccountClient';
 import ISavingsGoalClient, {
   AddMoneyToSavingsGoalResponse,
@@ -14,7 +16,7 @@ export default class TestSavingsGoalClient implements ISavingsGoalClient {
     currency: string
   ): Promise<CreateSavingsGoalResponse> {
     return new Promise((resolve) => {
-      return resolve({
+      resolve({
         savingsGoalUid: 'ssssssss-ssss-4sss-ssss-ssssssssssss',
         success: true,
         errors: [],
@@ -25,10 +27,8 @@ export default class TestSavingsGoalClient implements ISavingsGoalClient {
   public async getSavingsGoals(
     accountId: string
   ): Promise<SavingsGoalResponse> {
-    console.log('getSavingsGoals');
-
     return new Promise((resolve) => {
-      return resolve({
+      resolve({
         savingsGoals: [
           {
             id: 'ssssssss-ssss-4sss-ssss-ssssssssssss',
@@ -54,29 +54,19 @@ export default class TestSavingsGoalClient implements ISavingsGoalClient {
     amountMinorUnits: number,
     currency: string
   ): Promise<AddMoneyToSavingsGoalResponse> {
-    console.log(
-      'previous',
-      TestAccountClient.balance,
-      TestSavingsGoalClient.savingsTotal
-    );
-
     TestAccountClient.balance -= amountMinorUnits;
     TestSavingsGoalClient.savingsTotal += amountMinorUnits;
 
-    console.log(
-      'now',
-      TestAccountClient.balance,
-      TestSavingsGoalClient.savingsTotal
-    );
-
     return new Promise((resolve) => {
-      setTimeout(() => {
-        return resolve({
-          transferUid: transferId,
-          success: true,
-          errors: [],
-        } as AddMoneyToSavingsGoalResponse);
-      }, 1000);
+      setTimeout(
+        () =>
+          resolve({
+            transferUid: transferId,
+            success: true,
+            errors: [],
+          } as AddMoneyToSavingsGoalResponse),
+        1000
+      );
     });
   }
 }

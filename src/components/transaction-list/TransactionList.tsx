@@ -7,7 +7,6 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import Container from '@mui/material/Container';
 import Transaction from '../../lib/entities/Transaction';
 import formatMonetaryAmount from '../../utils/formatMonetaryAmountToString';
 import roundUpToNearest100 from '../../utils/roundUpToNearest100';
@@ -29,11 +28,7 @@ const TransactionList = (props: RoundUpFormProps) => {
               <CardContent sx={{ flexGrow: 1 }}>
                 <Typography variant="h4">{transaction.counterParty}</Typography>
                 <Typography variant="body2">{transaction.reference}</Typography>
-                <Stack
-                  mt={1}
-                  direction={'row'}
-                  justifyContent={'space-between'}
-                >
+                <Stack mt={1} direction="row" justifyContent="space-between">
                   <Typography>Amount</Typography>
                   <Typography>
                     {formatMonetaryAmount(
@@ -42,7 +37,7 @@ const TransactionList = (props: RoundUpFormProps) => {
                     )}
                   </Typography>
                 </Stack>
-                <Stack direction={'row'} justifyContent={'space-between'}>
+                <Stack direction="row" justifyContent="space-between">
                   <Typography>Round up</Typography>
                   <Typography>
                     +

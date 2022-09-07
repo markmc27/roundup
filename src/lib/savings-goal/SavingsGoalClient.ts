@@ -24,8 +24,6 @@ export default class SavingsGoalClient implements ISavingsGoalClient {
     return {
       headers: {
         Authorization: `Bearer ${this.config.authToken}`,
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
       },
     };
   }
@@ -66,14 +64,12 @@ export default class SavingsGoalClient implements ISavingsGoalClient {
     );
 
     const savingsGoals = response.data.savingsGoalList.map(
-      (savingsGoal: any) => {
-        return {
-          id: savingsGoal.savingsGoalUid,
-          name: savingsGoal.name,
-          totalSavedAmount: savingsGoal.totalSaved.minorUnits,
-          totalSavedCurrency: savingsGoal.totalSaved.currency,
-        };
-      }
+      (savingsGoal: any) => ({
+        id: savingsGoal.savingsGoalUid,
+        name: savingsGoal.name,
+        totalSavedAmount: savingsGoal.totalSaved.minorUnits,
+        totalSavedCurrency: savingsGoal.totalSaved.currency,
+      })
     );
 
     return {
@@ -99,7 +95,7 @@ export default class SavingsGoalClient implements ISavingsGoalClient {
       `${this.config.baseUrl}${endpoint}`,
       {
         amount: {
-          currency: currency,
+          currency,
           minorUnits: amountMinorUnits,
         },
       },

@@ -1,5 +1,3 @@
-import AccountWithBalance from '../entities/AccountWithBalance';
-
 export interface AccountInformationResponse {
   id: string;
   defaultCategoryId: string;

@@ -13,7 +13,7 @@ const AccountInformation = (props: AccountInformationProps) => {
   return (
     <Stack p={1}>
       <Typography variant="h2">{accountName}</Typography>
-      <Stack p={2} direction={'row'} justifyContent={'space-between'}>
+      <Stack p={2} direction="row" justifyContent="space-between">
         <Typography>Your balance</Typography>
         <Typography>
           {formatMonetaryAmount(

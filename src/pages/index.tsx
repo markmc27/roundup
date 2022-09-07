@@ -1,5 +1,6 @@
-import { Button, Container } from '@mui/material';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { Container } from '@mui/material';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import axios from 'axios';
 import { DateTime } from 'luxon';
 import type { GetServerSideProps, NextPage } from 'next';
 import Head from 'next/head';
@@ -17,6 +18,7 @@ import Transaction from '../lib/entities/Transaction';
 import SavingsGoalRepositoryFactory from '../lib/savings-goal/SavingsGoalsRepositoryFactory';
 import TransactionsRepositoryFactory from '../lib/transactions/TransactionsRepositoryFactory';
 import styles from '../styles/Home.module.css';
+import ApiRoutes from '../utils/ApiRoutes';
 import roundUpToNearest100 from '../utils/roundUpToNearest100';
 
 type PageProps = {
@@ -28,13 +30,12 @@ type PageProps = {
 };
 
 type TransferMutationData = {
-  accountId: string;
   savingGoalId: string;
   roundUpAmountMinorUnits: number;
   currency: string;
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const accountRepo = new AccountRepositoryFactory().getAccountRepo();
   const transactionsRepo =
     new TransactionsRepositoryFactory().getTransactionsRepo();
@@ -42,19 +43,19 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     new SavingsGoalRepositoryFactory().getSavingsGoalRepo();
 
   const accountInfo = await accountRepo.retrieveAccountWithBalance(
-    process.env.NEXT_PUBLIC_ACCOUNT_ID as string
+    process.env.ACCOUNT_ID as string
   );
 
   const today = DateTime.utc().startOf('day');
   const lastWeek = today.minus({ days: 7 });
   const transactions = await transactionsRepo.retrieveTransactionsBetween(
-    process.env.NEXT_PUBLIC_ACCOUNT_ID as string,
+    process.env.ACCOUNT_ID as string,
     lastWeek.toJSDate().toISOString(),
     today.toJSDate().toISOString()
   );
 
   const savingsGoals = await savingsGoalsRepo.retrieveSavingsGoals(
-    process.env.NEXT_PUBLIC_ACCOUNT_ID as string
+    process.env.ACCOUNT_ID as string
   );
 
   return {
@@ -82,45 +83,38 @@ const Home: NextPage<PageProps> = (props) => {
 
   const queryClient = useQueryClient();
 
-  const { data: accountInformation } = useAccountInformation(
-    accountInitialData,
-    accountInitialData.id
-  );
+  const { data: accountInformation } =
+    useAccountInformation(accountInitialData);
 
   const { data: transactions } = useTransactions(
     transactionsInitialData,
-    accountInitialData.id,
     defaultStartDateInitialData,
     defaultEndDateInitialData
   );
 
-  const { data: savingsGoals } = useSavingsGoals(
-    savingsGoalsInitialData,
-    accountInitialData.id
+  const { data: savingsGoals } = useSavingsGoals(savingsGoalsInitialData);
+
+  const roundUpAmount = transactionsInitialData.reduce(
+    (acc, transaction) =>
+      acc + roundUpToNearest100(transaction.amount.minorUnits),
+    0
   );
 
-  const roundUpAmount = transactionsInitialData.reduce((acc, transaction) => {
-    return acc + roundUpToNearest100(transaction.amount.minorUnits);
-  }, 0);
-
   const transferRoundUpMutation = useMutation(
-    (transferData: TransferMutationData) => {
-      const savingsGoalsRepo =
-        new SavingsGoalRepositoryFactory().getSavingsGoalRepo();
-
-      const { accountId, savingGoalId, roundUpAmountMinorUnits, currency } =
-        transferData;
-
-      return savingsGoalsRepo.transferToSavingsGoals(
-        accountId,
-        savingGoalId,
-        roundUpAmountMinorUnits,
-        currency
+    async (transferData: TransferMutationData) => {
+      const result = await axios.put<boolean>(
+        ApiRoutes.TransferToSavingsGoal,
+        transferData
       );
+
+      if (!result) {
+        throw new Error('Transfer failed');
+      }
+
+      return result;
     },
     {
       onSettled: () => {
-        console.log('settled');
         queryClient.refetchQueries([QueryKeys.AccountInfo]);
         queryClient.refetchQueries([QueryKeys.Transactions]);
         queryClient.refetchQueries([QueryKeys.SavingsGoals]);
@@ -130,7 +124,6 @@ const Home: NextPage<PageProps> = (props) => {
 
   const onTransferToSavingsGoal = async () => {
     await transferRoundUpMutation.mutateAsync({
-      accountId: process.env.NEXT_PUBLIC_ACCOUNT_ID as string,
       savingGoalId: savingsGoals[0].id,
       roundUpAmountMinorUnits: roundUpAmount,
       currency: savingsGoals[0].totalSaved.currency,

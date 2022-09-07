@@ -1,14 +1,15 @@
+export interface StarlingTransaction {
+  direction: 'IN' | 'OUT';
+  settledAmount: {
+    currency: string;
+    minorUnits: number;
+  };
+  transactionTime: string;
+  counterParty: string;
+  reference: string;
+}
 export interface TransactionsResponse {
-  transactions: {
-    direction: 'IN' | 'OUT';
-    settledAmount: {
-      currency: string;
-      minorUnits: number;
-    };
-    transactionTime: string;
-    counterParty: string;
-    reference: string;
-  }[];
+  transactions: StarlingTransaction[];
 }
 
 export default interface ITransactionsClient {

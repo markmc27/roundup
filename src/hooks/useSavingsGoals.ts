@@ -1,20 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 import QueryKeys from './QueryKeys';
-import SavingsGoalRepositoryFactory from '../lib/savings-goal/SavingsGoalsRepositoryFactory';
 import SavingsGoal from '../lib/entities/SavingsGoal';
+import ApiRoutes from '../utils/ApiRoutes';
 
-const useSavingsGoals = (initialData: SavingsGoal[], accountId: string) =>
+const useSavingsGoals = (initialData: SavingsGoal[]) =>
   useQuery(
     [QueryKeys.SavingsGoals],
     async () => {
-      const savingsGoalsRepo =
-        new SavingsGoalRepositoryFactory().getSavingsGoalRepo();
+      const response = await axios.get(ApiRoutes.SavingsGoals);
 
-      const savingsGoals = await savingsGoalsRepo.retrieveSavingsGoals(
-        accountId
-      );
-
-      return savingsGoals;
+      return response.data as SavingsGoal[];
     },
     {
       initialData,

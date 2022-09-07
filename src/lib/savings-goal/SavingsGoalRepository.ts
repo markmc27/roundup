@@ -10,6 +10,7 @@ export default class SavingsGoalRepository implements ISavingsGoalRepository {
   constructor(client: ISavingsGoalClient) {
     this.client = client;
   }
+
   async transferToSavingsGoals(
     accountId: string,
     savingGoalId: string,
@@ -35,15 +36,16 @@ export default class SavingsGoalRepository implements ISavingsGoalRepository {
   public async retrieveSavingsGoals(accountId: string): Promise<SavingsGoal[]> {
     const clientResponse = await this.client.getSavingsGoals(accountId);
 
-    return clientResponse.savingsGoals.map((savingsGoal) => {
-      return new SavingsGoal({
-        id: savingsGoal.id,
-        name: savingsGoal.name,
-        totalSaved: new MonetaryAmount({
-          currency: savingsGoal.totalSavedCurrency,
-          minorUnits: savingsGoal.totalSavedAmount,
-        }),
-      });
-    });
+    return clientResponse.savingsGoals.map(
+      (savingsGoal) =>
+        new SavingsGoal({
+          id: savingsGoal.id,
+          name: savingsGoal.name,
+          totalSaved: new MonetaryAmount({
+            currency: savingsGoal.totalSavedCurrency,
+            minorUnits: savingsGoal.totalSavedAmount,
+          }),
+        })
+    );
   }
 }

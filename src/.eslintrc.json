@@ -15,6 +15,7 @@
         "extensions": [".tsx", ".ts"]
       }
     ],
+    "react/prop-types": 0,
     "import/extensions": [
       "error",
       "ignorePackages",
@@ -35,16 +36,9 @@
     "import/no-extraneous-dependencies": [
       "error",
       { "devDependencies": ["**/cypress/**/*.ts"] }
-    ],
-    "@typescript-eslint/array-type": [
-      "error",
-      {
-        "default": "array",
-        "readonly": "array"
-      }
     ]
   },
   "parserOptions": {
-    "project": ["./tsconfig.json", "./cypress/tsconfig.json"],
+    "project": ["./tsconfig.json", "./cypress/tsconfig.json"]
   }
 }

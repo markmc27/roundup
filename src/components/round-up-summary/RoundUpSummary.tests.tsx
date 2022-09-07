@@ -1,7 +1,6 @@
 import { render } from '@testing-library/react';
 import MonetaryAmount from '../../lib/entities/MonetaryAmount';
 import SavingsGoal from '../../lib/entities/SavingsGoal';
-import Transaction from '../../lib/entities/Transaction';
 import RoundUpSummary from './RoundUpSummary';
 
 describe('Round-up form', () => {
@@ -15,10 +14,11 @@ describe('Round-up form', () => {
       <RoundUpSummary
         savingsGoal={new SavingsGoal({ totalSaved })}
         roundUpAmountMinorUnits={0}
-        accountCurrency={'GBP'}
+        accountCurrency="GBP"
         onTransferToSavingsGoal={() => {}}
         defaultEndDate="2021-01-01"
         defaultStartDate="2020-01-01"
+        isLoading={false}
       />
     );
 
@@ -43,7 +43,8 @@ describe('Round-up form', () => {
           })
         }
         roundUpAmountMinorUnits={0}
-        accountCurrency={'GBP'}
+        accountCurrency="GBP"
+        isLoading={false}
       />
     );
 
