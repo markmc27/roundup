@@ -38,7 +38,7 @@ const RoundUpSummary = (props: RoundUpFormProps) => {
         </Stack>
         <Stack direction="row" justifyContent="space-between">
           <Typography>Saved total</Typography>
-          <Typography>
+          <Typography data-testid="saved-total">
             {formatMonetaryAmount(
               savingsGoal.totalSaved.minorUnits,
               savingsGoal.totalSaved.currency

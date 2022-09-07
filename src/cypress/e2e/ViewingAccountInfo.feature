@@ -11,7 +11,7 @@ Feature: View account information
         And I see "Round-up start date" 
         And I see "Round-up end date"
         And I see "Transactions" 
-        And I see "Savings goals"
+        And I see "Savings goal"
         And I see "Round-up amount" 
         And I see "Transfer to savings goal"
 
@@ -38,7 +38,7 @@ Feature: View account information
 
     Scenario: User has a savings goal
         Given I visit the site 
-        And I am viewing "Savings goals"
+        And I am viewing "Savings goal"
         Then I see "Future adventures" savings goal
 
     Scenario: User reviews round-up total

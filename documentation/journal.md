@@ -105,3 +105,23 @@ Tue 6th Sept 2100:
     Switched the app from test mode to real mode and getting CORS issues. Because it worked in the integration tests and postman, I didn't think to check the CORS headers in the browser.
 
     I'll add a couple of Next api routes and move the calls to the server and update the hooks to use the Next api.
+
+
+Wed 7th Sept 0700: 
+    Added the Next api routes and the calls to the server. That's all working now. Also noticed that the linter was complaining because there was a comma that it wasn't expecting. Removed the comma and there were a ton of linting issues. Fixed those and got the next build working. 
+
+    Hooked up the final cypress test to test transferring the round up to a savings goal updates the account balance and the savings goal total on the screen. If I was doing this further, I would add an API endpoint to reset the test data on the server so the cypres tests can be run again and hook that up as a pre-condition in the cypress test.
+
+    Although I would have liked to spend more time writing tests for the api routes and the react components that I updated to get more coverage, I'm happy enough with how this has turned out. Spending a couple of hours here and there and not having a great deal of time to dedicate to it, I am happy with the results. 
+
+    The app showcases a range of skills and experience that I think will be beneficial to the role and team at Starling. 
+
+    During this challenge, I utilised the following tools and techniques:
+    * BDD acceptance criteria - taking the challenge spec and extrapolating capabiliities, features, and scenarios. Although not all scenarios were covered, I was able to get a good sense of the overall scope of the challenge.
+    * Next JS - showcasing server-side rendering, api routes, and switching between live and test data
+    * React - custom hooks for the api calls, custom components, and styling
+    * Material UI - small use of the theme to add some branding colours to the app
+    * React Testing Library
+    * React Query 
+    * Cypress and Cucumber - e2e tests using the BDD stories written at the start
+
