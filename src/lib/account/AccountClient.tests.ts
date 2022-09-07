@@ -4,7 +4,7 @@
 
 import AccountClient from './AccountClient';
 
-describe('Account Client Integration', () => {
+describe.skip('Account Client Integration', () => {
   it('should return valid AccountInformationResponse', async () => {
     const accountId = 'edb62ad2-80e1-4918-a884-5c69f687e2d3';
     const accountName = 'Personal';

@@ -15,7 +15,7 @@ const config: SavingsGoalClientConfig = {
     '/account/{accountId}/savings-goals/{savingGoalId}/add-money/{transferId}',
   baseUrl: 'https://api-sandbox.starlingbank.com/api/v2',
 };
-describe('SavingsGoalClient', () => {
+describe.skip('SavingsGoalClient', () => {
   it('should return valid SavingsGoalsResponse', async () => {
     const savingsGoalClient = new SavingsGoalClient(config);
 

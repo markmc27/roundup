@@ -5,7 +5,7 @@
 import { DateTime } from 'luxon';
 import TransactionsClient from './TransactionsClient';
 
-describe('Transactions Client Integration', () => {
+describe.skip('Transactions Client Integration', () => {
   it('should return valid TransactionsResponse', async () => {
     const accountId = 'edb62ad2-80e1-4918-a884-5c69f687e2d3';
     const startDate = DateTime.fromFormat('2020-06-01', 'yyyy-MM-dd', {

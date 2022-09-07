@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "cypress:open": "cypress open",
+    "cypress:headless": "cypress run --record false",
     "test": "jest",
     "test:watch": "jest --watch"
   },
